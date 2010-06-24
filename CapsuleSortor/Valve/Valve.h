@@ -27,10 +27,17 @@ public:
 
 	void			SetProcessResult(	ETIndex					index,
 										unsigned int			procResult);
+	void			SetResultMode1	(	ETIndex					index,
+										unsigned int			procResult);
 	void			ShortInterval   (   ETIndex					testIndex,
 										unsigned int	        tempResult);
 	void			LongInterval    (   ETIndex					testIndex,
 										unsigned int	        tempResult);
+	bool			PushResultMode2	(	ETIndex testIndex,
+										size_t	period);
+	bool			PushResultMode1	(	ETIndex testIndex,
+										size_t	period);
+
 	static void		AddToAllCount	(	size_t num ) { m_allCount += num;	}
 	static void		AddToBadCount	(	size_t num ) { m_badCount += num;	}
 	static void		ClearCount		( ) {	m_allCount = 0;
