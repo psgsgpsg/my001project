@@ -1,0 +1,12 @@
+VER:CapsuleSortor-09-10-29-5
+1.SVSGigECard中增加FrameInterval函数计算帧间距。（ImageTimeStamp方法不能使用）
+
+VER:CapsuleSortor-09-10-29-6
+1. SVSGigECard中增加RefreshData函数更新m_roi；
+2.整理程序中的冗余代码；
+
+VER:CapsuleSortor-09-10-29-7
+1.整理OPEN()函数将streamchannel_creat()放进Open（）中；
+
+VER:CapsuleSortor-09-10-29-8
+1.修改SVSGigECard中的SetROI函数，在调用设置streamChannel之前修改ROI。

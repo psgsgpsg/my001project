@@ -1,0 +1,33 @@
+[Acquisition Device Features]
+DeviceVendorName=DALSA
+DeviceModelName=Genie M1024
+Gain=0;GainExponent=1
+BlackLevel=0;BlackLevelExponent=0
+ExposureMode=1
+ExposureTime=300;ExposureTimeExponent=6
+ExposureAlignment=0
+TriggerDelayToIntegration=0;TriggerDelayToIntegrationExponent=6
+BinningHorizontal=1
+BinningVertical=1
+TestImageSelector=0
+LUTEnable=0
+FlatFieldEnable=0
+TriggerEnable=1
+TriggerSource=1
+FramesPerTrigger=1;FramesPerTriggerExponent=0
+PolarityInput_1=0
+DebounceInput_1=1;DebounceInput_1Exponent=6
+PolarityInput_2=0
+DebounceInput_2=1;DebounceInput_2Exponent=6
+OutputSelectorOutput_1=0
+OutputSelectorOutput_2=0
+Width=1024;WidthExponent=0
+Height=560;HeightExponent=0
+OffsetX=0;OffsetXExponent=0
+OffsetY=40;OffsetYExponent=0
+ImageFlip=0
+NetworkConfigurationMode=1
+InterPacketDelay=0;InterPacketDelayExponent=6
+PacketSize=1500;PacketSizeExponent=0
+HeartbeatTimeout=3000;HeartbeatTimeoutExponent=3
+MaximumPacketResend=1000;MaximumPacketResendExponent=1
