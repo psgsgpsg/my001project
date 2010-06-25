@@ -105,8 +105,7 @@ bool Valve::PushResult(ETIndex testIndex, size_t period)
 
 bool Valve::PushResultMode1(ETIndex testIndex, size_t period)
 {
-	static	bool	pushflag = false;
-	if (pushflag)
+	if (m_excuteFlag[testIndex])
 	{
 		if (eSecond == testIndex)
 		{
@@ -120,7 +119,6 @@ bool Valve::PushResultMode1(ETIndex testIndex, size_t period)
 			m_pushedIndex = eSecond;
 		}
 	}
-	pushflag = !pushflag;
 	return true;
 }
 
@@ -162,8 +160,46 @@ bool Valve::PushResultMode2(ETIndex testIndex, size_t period)
 *
 *
 ********************************************************************************/
-
 unsigned int  Valve::CtrlResult(ETIndex testIndex, size_t	period)
+{
+	GrabIndex	indexMode = static_cast<GrabIndex>(ConfigInfo::TheConfigInfo().GetGrabIndex());
+	switch (indexMode)
+	{
+	case ONEBYONE:
+		return CtrlResultMode1(testIndex, period);
+		
+	case TWOBYTWO:
+		return CtrlResultMode2(testIndex, period);
+	default:
+		return 0;
+	}
+}
+
+unsigned int  Valve::CtrlResultMode1(ETIndex testIndex, size_t	period)
+{
+	if (m_excuteFlag[testIndex])
+	{		
+		unsigned int badSum			= 0;
+		unsigned int finalResult	= 0;
+		unsigned int stackValue		= m_resultStack[m_resultInterval]&0xf;
+		unsigned int resultValue	= m_finalResult[testIndex]&0xf;
+		
+		finalResult = m_finalResult[testIndex]|m_resultStack[m_resultInterval];
+	//	finalResult = finalResult|((m_resultStack[m_resultInterval-1]>>3)&0xf);			
+		
+		Control(testIndex, finalResult);
+		for( int i = 0; i < 4; ++i)
+		{
+			badSum +=((finalResult>>i)&0x1);
+		}
+		m_pushedIndex = eFirst;
+	return badSum;
+
+	}
+	return 0;
+}
+
+unsigned int  Valve::CtrlResultMode2(ETIndex testIndex, size_t	period)
 {
 	static size_t lastPeriod = period;
 	m_interType[testIndex] = lastPeriod > period ? eShortInterval:eLongInterval;
@@ -217,6 +253,7 @@ void	Valve::ShortInterval(ETIndex testIndex,	  unsigned int	tempResult)
 {
 	m_finalResult[testIndex] = (((m_preResullt[testIndex]<<1)&0xf)| (tempResult&0xf))&0xf;
 }
+
 void	Valve::LongInterval(ETIndex testIndex,	unsigned int	tempResult)
 {
 	m_finalResult[testIndex]	= ((m_finalResult[testIndex]|((tempResult&0xf)>>3))&0xf);
@@ -224,7 +261,7 @@ void	Valve::LongInterval(ETIndex testIndex,	unsigned int	tempResult)
 }
 
 void	Valve::SetProcessResult(	ETIndex					index,
-										unsigned int			procResult)
+									unsigned int			procResult)
 {
 	GrabIndex	grabMode = ConfigInfo::TheConfigInfo().GetGrabIndex();
 	switch(grabMode)
@@ -248,15 +285,15 @@ void	Valve::SetProcessResult(	ETIndex					index,
 void	Valve::SetResultMode1	(	ETIndex					index,
 									unsigned int			procResult)
 {
-	static	bool	mode[CAMCOUNT];
-	if (mode[index])
+	
+	if (m_excuteFlag[index])
 	{
-		m_preResullt[index] = procResult|(m_preResullt[index]<<2);
+		m_preResullt[index] = procResult|(m_preResullt[index]);
 	}
 	else
 	{
 		m_finalResult[index]	= (procResult>>2) | m_preResullt[index];
 		m_preResullt[index]		= procResult<<2;
 	}
-	mode[index] = !mode[index];
+	m_excuteFlag[index] = !m_excuteFlag[index];
 }

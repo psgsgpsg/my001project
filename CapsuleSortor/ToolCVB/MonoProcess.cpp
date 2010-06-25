@@ -109,10 +109,7 @@ unsigned int MonoProcess::ComProcess( WORKMODE mode)
 		size_t  posIndex	= 0;
 		if(RotateIMG(i, m_profileBlob, m_cvbProfileImg, proSubRot, posIndex))
 		{
-			if (posIndex == 0 || posIndex == 2)
-			{
-				counter++;
-			}
+			counter |= 1<<posIndex;
 			m_sortObserver.ObserverIMG(SortObserver::MSub, proSubRot);
 
 			const long width = ImageWidth (proSubRot);

@@ -4,6 +4,7 @@
 #include "TCritSect.h"
 #include <windows.h>
 #include "TypeDefine.h"
+#include "ConfigInfo.h"
  
 class Valve
 {
@@ -22,6 +23,10 @@ public:
 	bool			PushResult		(   ETIndex             testIndex,
 										size_t				period);
 
+	unsigned int	CtrlResultMode1		(   ETIndex	        testIndex, 
+										size_t			period);
+	unsigned int	CtrlResultMode2		(   ETIndex	        testIndex, 
+										size_t			period);
 	unsigned int	CtrlResult		(   ETIndex	        testIndex, 
 										size_t			period);
 
@@ -38,7 +43,33 @@ public:
 	bool			PushResultMode1	(	ETIndex testIndex,
 										size_t	period);
 
-	static void		AddToAllCount	(	size_t num ) { m_allCount += num;	}
+	static void		AddToAllCount	(	size_t num ) 
+	{ 
+		GrabIndex indexMode = ConfigInfo::TheConfigInfo().GetGrabIndex();
+		int i = 0;
+		switch (indexMode)
+		{
+		case ONEBYONE:
+			for ( i = 0; i <2; i++)
+			{
+				if ((num>>i)&&0x01)
+				{
+					m_allCount++;
+				}
+			}
+			break;
+		case TWOBYTWO:
+			if (num&&0x01)
+			{
+				m_allCount++;
+			}
+			if (num&&0x04)
+			{
+				m_allCount++;
+			}
+			break;
+		}	
+	}
 	static void		AddToBadCount	(	size_t num ) { m_badCount += num;	}
 	static void		ClearCount		( ) {	m_allCount = 0;
 											m_badCount = 0;		}
@@ -62,6 +93,7 @@ protected:
 private:
 	enum		        { CAMCOUNT  = 2, STACKLEN    = 256 };
 	EIntervalType		m_interType[CAMCOUNT];
+	bool				m_excuteFlag[CAMCOUNT];
 	unsigned int        m_resultStack[STACKLEN];
 	ETIndex	            m_pushedIndex;
 	TCritSect	        m_critSect;
