@@ -22,7 +22,6 @@
 #include "SpecifyCapsualeDlg.h"
 #include "pathselect.h"
 
-#pragma comment(lib, "cvcimg.lib")
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -1215,92 +1214,58 @@ void	CapsuleSorterDlg::FirstCamFunc	(void *param)
 	CapsuleSorterDlg *pThis = reinterpret_cast<CapsuleSorterDlg*>(param);
 	
 	TImageCard	*pCamCard = pThis->m_isSim	?reinterpret_cast<TImageCard*>(&pThis->m_simCam)
-											:reinterpret_cast<TImageCard*>(&pThis->m_firstCam);
+		:reinterpret_cast<TImageCard*>(&pThis->m_firstCam);
 	while (1)
 	{
-
-			pCamCard->Wait();
-			pThis->m_firstSect.Lock();
-			Valve::EIntervalType interType = Valve::eShortInterval;
-
-			try
-			{
-				size_t period	= pCamCard->FrameInterval();
-				static size_t lastPeriod = period;
-				interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
-				lastPeriod = period;
-				size_t badCount = 0;
-				if (Valve::eShortInterval == interType)
-				{
-					badCount	= Valve::TheValve().CtrlResult(	Valve::eFirst);
-				}	
-				CapsuleProc::AddToBadCount(badCount);
-			}
-			catch(...)
-			{
-				FILE* pFile = fopen("D:\\logperiod.txt", "wb");
-				fwrite("period error", sizeof(char), strlen("period error"), pFile);
-				fclose(pFile);
-			}
-
-			void*	pMem	=	pCamCard->GetPixelMemBase();
-			size_t	bytes	=	pCamCard->Width()
-				* pCamCard->Height() 
-				* pCamCard->BytesPerPixel();
+		
+		pCamCard->Wait();
+		Valve::EIntervalType interType = Valve::eShortInterval;
+		
+		size_t period	= pCamCard->FrameInterval();
+		static size_t lastPeriod = period;
+		interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
+		lastPeriod = period;
+		size_t badCount = 0;
+		if (Valve::eShortInterval == interType)
+		{
+			badCount	= Valve::TheValve().CtrlResult(	Valve::eFirst);
+		}	
+		CapsuleProc::AddToBadCount(badCount);
+		
+		
+		void*	pMem	=	pCamCard->GetPixelMemBase();
+		size_t	bytes	=	pCamCard->Width()
+			* pCamCard->Height() 
+			* pCamCard->BytesPerPixel();
+		
+		if(pThis->m_firstProcess.SetRawImage(pMem, bytes))
+		{
+			unsigned int result = 0;
 			
-			if(pThis->m_firstProcess.SetRawImage(pMem, bytes))
+			result		= pThis->m_firstProcess.Process( );		
+			
+			size_t		ctlResult	= result &0x0f;		
+			if (Valve::eShortInterval == interType)
 			{
-				unsigned int result = 0;
-				try
-				{
-					result		= pThis->m_firstProcess.Process( );
-				}
-				catch(...)
-				{
-					FILE* pFile = fopen("D:\\logprocess.txt", "wb");
-					fwrite("process error", sizeof(char), strlen("process error"), pFile);
-					fclose(pFile);
-				}
-
-				try
-				{
-
-					size_t		ctlResult	= result &0x0f;		
-					if (Valve::eShortInterval == interType)
-					{
-						Valve::TheValve().ShortInterval(Valve::eFirst, ctlResult);
-					}
-					else
-					{
-						Valve::TheValve().LongInterval(Valve::eFirst, ctlResult);
-					}
-				}
-				catch(...)
-				{
-					FILE* pFile = fopen("D:\\logTheValve.txt", "wb");
-					fwrite("TheValve error", sizeof(char), strlen("TheValve error"), pFile);
-					fclose(pFile);
-				}
-				
+				Valve::TheValve().ShortInterval(Valve::eFirst, ctlResult);
 			}
-			try
+			else
 			{
-				pThis->m_firstSect.Unlock();
-				pThis->m_cvbHdlDisp	= CapsuleProc::ObservedIMG();
-				pThis->m_testResult	= CapsuleProc::ObservedParam();
-				pThis->m_badCount	= CapsuleProc::BadCount();
-				
-				CRect rect;
-				pThis->GetDlgItem(IDC_RawImgRect)->GetWindowRect(&rect);
-				pThis->InvalidateRect(&rect, FALSE);
-				pThis->GetDlgItem(IDC_HdlImgRect)->GetWindowRect(&rect);
-				pThis->InvalidateRect(&rect, FALSE);
-				pThis->UpdateData(FALSE);
-			}
-			catch(...)
-			{}
+				Valve::TheValve().LongInterval(Valve::eFirst, ctlResult);
+			}			
+		}
+		pThis->m_cvbHdlDisp	= CapsuleProc::ObservedIMG();
+		pThis->m_testResult	= CapsuleProc::ObservedParam();
+		pThis->m_badCount	= CapsuleProc::BadCount();
+		
+		CRect rect;
+		pThis->GetDlgItem(IDC_RawImgRect)->GetWindowRect(&rect);
+		pThis->InvalidateRect(&rect, FALSE);
+		pThis->GetDlgItem(IDC_HdlImgRect)->GetWindowRect(&rect);
+		pThis->InvalidateRect(&rect, FALSE);
+		pThis->UpdateData(FALSE);		
 	}
-
+	
 }
 
 /*******************************************************************************
@@ -1318,87 +1283,56 @@ void	CapsuleSorterDlg::FirstCamFunc	(void *param)
 void	CapsuleSorterDlg::SecondCamFunc	(void *param)
 {
 	CapsuleSorterDlg*	pThis = (CapsuleSorterDlg*)(param);
-
+	
 	TImageCard	*pCamCard = pThis->m_isSim	?reinterpret_cast<TImageCard*>(&pThis->m_secondSimCam)
-											:reinterpret_cast<TImageCard*>(&pThis->m_secondCam);
+		:reinterpret_cast<TImageCard*>(&pThis->m_secondCam);
 	while(1)
 	{
-			pCamCard->Wait();
-			pThis->m_secondSect.Lock();
-
-			Valve::EIntervalType interType = Valve::eShortInterval;
-			try
-			{
-				size_t period = pCamCard->FrameInterval();
-				static lastPeriod =  period;
-				size_t badCount = 0;
-				Valve::EIntervalType interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
-				lastPeriod = period;
-				if (Valve::eShortInterval == interType)
-				{
-					badCount	= Valve::TheValve().PushResult(Valve::eSecond);
-				}
-			}
-			catch(...)
-			{
-				FILE* pFile = fopen("D:\\logperiod2.txt", "wb");
-				fwrite("period error", sizeof(char), strlen("period error"), pFile);
-				fclose(pFile);
-			}
-
-			void*	pMem	=	pCamCard->GetPixelMemBase();
-			size_t	bytes	=	pCamCard->Width() * pCamCard->Height() * pCamCard->BytesPerPixel();	
+		pCamCard->Wait();
+		
+		Valve::EIntervalType interType = Valve::eShortInterval;
+		
+		size_t period = pCamCard->FrameInterval();
+		static lastPeriod =  period;
+		size_t badCount = 0;
+		Valve::EIntervalType interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
+		lastPeriod = period;
+		if (Valve::eShortInterval == interType)
+		{
+			badCount	= Valve::TheValve().PushResult(Valve::eSecond);
+		}		
+		
+		void*	pMem	=	pCamCard->GetPixelMemBase();
+		size_t	bytes	=	pCamCard->Width() * pCamCard->Height() * pCamCard->BytesPerPixel();	
+		
+		if(pThis->m_secondProcess.SetRawImage(pMem, bytes))
+		{	
+			unsigned int	result = 0;			
+			result	= pThis->m_secondProcess.Process( );			
 			
-			if(pThis->m_secondProcess.SetRawImage(pMem, bytes))
-			{	
-				unsigned int	result = 0;
-				try
-				{
-					result	= pThis->m_secondProcess.Process( );
-				}
-				catch(...)
-				{
-					FILE* pFile = fopen("D:\\logprocess2.txt", "wb");
-					fwrite("process error", sizeof(char), strlen("process error"), pFile);
-					fclose(pFile);
-				}
-
-				try
-				{
-					size_t		ctlResult	= result &0x0f;
-					if (Valve::eShortInterval == interType)
-					{
-						Valve::TheValve().ShortInterval(Valve::eSecond, ctlResult);
-					}
-					else
-					{
-						Valve::TheValve().LongInterval(Valve::eSecond, ctlResult);
-					}	
-				}
-				catch(...)
-				{
-					FILE* pFile = fopen("D:\\logTheValve2.txt", "wb");
-					fwrite("TheValve error", sizeof(char), strlen("TheValve error"), pFile);
-					fclose(pFile);
-				}
-			}	
-			try
+			size_t		ctlResult	= result &0x0f;
+			if (Valve::eShortInterval == interType)
 			{
-				pThis->m_secondSect.Unlock();
-				pThis->m_cvbHdlDisp	= CapsuleProc::ObservedIMG();
-				pThis->m_testResult	= CapsuleProc::ObservedParam();	
-				pThis->m_allCount	= CapsuleProc::AllCount() ;
-				
-				CRect rect;
-				pThis->GetDlgItem(IDC_RawImgRect2)->GetWindowRect(&rect);
-				pThis->InvalidateRect(&rect, FALSE);
-				pThis->GetDlgItem(IDC_HdlImgRect)->GetWindowRect(&rect);
-				pThis->InvalidateRect(&rect, FALSE);
-				pThis->UpdateData(FALSE);
+				Valve::TheValve().ShortInterval(Valve::eSecond, ctlResult);
 			}
-			catch(...)
-			{}
-
+			else
+			{
+				Valve::TheValve().LongInterval(Valve::eSecond, ctlResult);
+			}	
+			
+		}			
+		
+		pThis->m_cvbHdlDisp	= CapsuleProc::ObservedIMG();
+		pThis->m_testResult	= CapsuleProc::ObservedParam();	
+		pThis->m_allCount	= CapsuleProc::AllCount() ;
+		
+		CRect rect;
+		pThis->GetDlgItem(IDC_RawImgRect2)->GetWindowRect(&rect);
+		pThis->InvalidateRect(&rect, FALSE);
+		pThis->GetDlgItem(IDC_HdlImgRect)->GetWindowRect(&rect);
+		pThis->InvalidateRect(&rect, FALSE);
+		pThis->UpdateData(FALSE);
+		
 	}	
 }
 
