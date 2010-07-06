@@ -1295,7 +1295,9 @@ void	CapsuleSorterDlg::SecondCamFunc	(void *param)
 		size_t period = pCamCard->FrameInterval();
 		static lastPeriod =  period;
 		size_t badCount = 0;
-		Valve::EIntervalType interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
+		
+		interType = lastPeriod > period ? Valve::eShortInterval:Valve::eLongInterval;
+		
 		lastPeriod = period;
 		if (Valve::eShortInterval == interType)
 		{
