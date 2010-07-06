@@ -43,8 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /I "../ToolCVB" /I "../ToolCVB/Include" /I "../Valve" /I "../Remain" /I "../CapsuleSorter" /I "../ImageCard" /I "../ToolSrc" /I "../ImageCard/SVSGigE\include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "COLOR_ORDER_RGB" /D "NEW_REMAIN" /Fr /YX /FD /c
-# SUBTRACT CPP /Z<none>
+# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /I "../ToolCVB" /I "../ToolCVB/Include" /I "../Valve" /I "../Remain" /I "../CapsuleSorter" /I "../../ImageCard" /I "../ToolSrc" /I "../../ImageCard/SVSGigE\include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "COLOR_ORDER_RGB" /D "NEW_REMAIN" /Fr /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
@@ -163,7 +162,7 @@ SOURCE=.\SelectHDCfg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SimularCard.cpp
+SOURCE=..\..\ImageCard\SimularCard.cpp
 # End Source File
 # Begin Source File
 
@@ -184,11 +183,11 @@ SOURCE=.\StdAfx.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SVSGigE\include\SVGigE.cpp
+SOURCE=..\..\ImageCard\SVSGigE\include\SVGigE.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SVSGigECard.cpp
+SOURCE=..\..\ImageCard\SVSGigECard.cpp
 # End Source File
 # Begin Source File
 
@@ -208,7 +207,7 @@ SOURCE=..\ToolSrc\TColorChecker.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\TImageCard.cpp
+SOURCE=..\..\ImageCard\TImageCard.cpp
 # End Source File
 # Begin Source File
 
@@ -376,7 +375,7 @@ SOURCE=.\SelectHDCfg.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SimularCard.h
+SOURCE=..\..\ImageCard\SimularCard.h
 # End Source File
 # Begin Source File
 
@@ -400,11 +399,11 @@ SOURCE=.\StdAfx.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SVSGigE\include\SVGigE.h
+SOURCE=..\..\ImageCard\SVSGigE\include\SVGigE.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\SVSGigECard.h
+SOURCE=..\..\ImageCard\SVSGigECard.h
 # End Source File
 # Begin Source File
 
@@ -432,7 +431,7 @@ SOURCE=..\ToolSrc\TCritSect.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\ImageCard\TImageCard.h
+SOURCE=..\..\ImageCard\TImageCard.h
 # End Source File
 # Begin Source File
 
@@ -629,19 +628,19 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
-# Section CapsuleSorter : {648A5600-2C6E-101B-82B6-000000000014}
-# 	2:21:DefaultSinkHeaderFile:mscomm.h
-# 	2:16:DefaultSinkClass:CMSComm
+# Section CapsuleSorter : {E6E17E90-DF38-11CF-8E74-00A0C90F26F8}
+# 	2:5:Class:CMSComm
+# 	2:10:HeaderFile:mscomm.h
+# 	2:8:ImplFile:mscomm.cpp
 # End Section
 # Section CapsuleSorter : {289A0004-32DD-11D3-98F3-0060082C35E6}
 # 	2:5:Class:CCVdisplay
 # 	2:10:HeaderFile:cvdisplay.h
 # 	2:8:ImplFile:cvdisplay.cpp
 # End Section
-# Section CapsuleSorter : {E6E17E90-DF38-11CF-8E74-00A0C90F26F8}
-# 	2:5:Class:CMSComm
-# 	2:10:HeaderFile:mscomm.h
-# 	2:8:ImplFile:mscomm.cpp
+# Section CapsuleSorter : {648A5600-2C6E-101B-82B6-000000000014}
+# 	2:21:DefaultSinkHeaderFile:mscomm.h
+# 	2:16:DefaultSinkClass:CMSComm
 # End Section
 # Section CapsuleSorter : {289A0006-32DD-11D3-98F3-0060082C35E6}
 # 	2:21:DefaultSinkHeaderFile:cvdisplay.h
