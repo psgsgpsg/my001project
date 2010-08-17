@@ -1,0 +1,40 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: cvblobslib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB4.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "c:\Archivos de programa\OpenCV\cv\include" /I "c:\Archivos de programa\OpenCV\cxcore\include\\" /I "c:\Archivos de programa\OpenCV\OtherLibs\HighGUI\\" /I "..\inspecta\matrix" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /D "_AFXDLL" /Fp"Release/cvblobslib.pch" /YX /Fo"Release/" /Fd"Release/" /FD /fast /Qopenmp /G7 /QaxW /Qvec_report3 /c 
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\blob.cpp"
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\BlobContour.cpp"
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\BlobOperators.cpp"
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\BlobResult.cpp"
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\ComponentLabeling.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB4.tmp" 
+Creating command line "link.exe -lib /nologo /out:"Release\cvblobslib.lib"  ".\Release\blob.obj" ".\Release\BlobContour.obj" ".\Release\BlobOperators.obj" ".\Release\BlobResult.obj" ".\Release\ComponentLabeling.obj" "
+<h3>Output Window</h3>
+Compiling...
+Command line warning D4002 : ignoring unknown option '/fast'
+Command line warning D4002 : ignoring unknown option '/Qopenmp'
+Command line warning D4002 : ignoring unknown option '/G7'
+Command line warning D4002 : ignoring unknown option '/QaxW'
+Command line warning D4002 : ignoring unknown option '/Qvec_report3'
+blob.cpp
+BlobContour.cpp
+BlobOperators.cpp
+BlobResult.cpp
+ComponentLabeling.cpp
+Creating library...
+
+
+
+<h3>Results</h3>
+cvblobslib.lib - 0 error(s), 5 warning(s)
+</pre>
+</body>
+</html>

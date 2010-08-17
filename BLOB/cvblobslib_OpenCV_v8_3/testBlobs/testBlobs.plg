@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: testBlobs - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC3.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "c:\archivos de programa\opencv\cxcore\include" /I "c:\archivos de programa\opencv\cv\include" /I "c:\archivos de programa\opencv\otherlibs\highgui" /I "..\..\cvblobslib" /I "..\..\\" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /Fp"Release/testBlobs.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"d:\My Documents\Downloads\cvblobslib_OpenCV_v8_3\testBlobs\main.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC3.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC4.tmp" with contents
+[
+cxcore.lib cv.lib highgui.lib cvblobslib.lib /nologo /subsystem:console /incremental:no /pdb:"Release/testBlobs.pdb" /machine:I386 /out:"Release/testBlobs.exe" /libpath:"c:\Archivos de programa\OpenCV\lib\\" /libpath:"c:\archivos de programa\opencv\cv\include" /libpath:"c:\archivos de programa\opencv\otherlibs\highgui" /libpath:"..\..\release" 
+".\Release\main.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC4.tmp"
+<h3>Output Window</h3>
+Compiling...
+main.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+testBlobs.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
