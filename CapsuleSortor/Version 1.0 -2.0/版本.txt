@@ -1,0 +1,6 @@
+1.CapsuleSortor-10-11-14
+修改：valve中的CtrlResult方法，使得胶囊的相对位置从原来的以视场的宽度为单位提高到以凹槽为单位。
+优点：在新的版本中能够通过调整配置文件中的视场的相对位置更加灵活的合并两个视场的结果。
+2.CapsuleSortor-10-11-14-1
+修改：CapsuleProc类中增加TransBlobAnalysis函数，该函数为针对透明胶囊的斑点检测。
+
