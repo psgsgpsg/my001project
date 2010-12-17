@@ -8,7 +8,6 @@
 class Valve
 {
 public:
-	typedef enum { eFirst = 0,          eSecond = 1  } ETIndex;
 	typedef enum { eShortInterval = 1,      eLongInterval =3 }EIntervalType;
 	static Valve& TheValve();
 	~Valve();
@@ -19,19 +18,19 @@ public:
 	ValveParam		GetParam	() const;
 
 
-	bool			PushResult	(	ETIndex             testIndex);
+	bool			PushResult	(	EIndex             testIndex);
 
-	unsigned int	CtrlResult	(   ETIndex	        testIndex);
+	unsigned int	CtrlResult	(   EIndex	        testIndex);
 
 
-	void			ShortInterval(  ETIndex             testIndex,
+	void			ShortInterval(  EIndex             testIndex,
 									unsigned int	        tempResult);
-	void			LongInterval(   ETIndex             testIndex,
+	void			LongInterval(   EIndex             testIndex,
 					unsigned int	        tempResult);
 private:
-	bool            Control		(	ETIndex             testIndex,
+	bool            Control		(	EIndex             testIndex,
 									unsigned int	        result);
-	ETIndex			TheOtherTest(   ETIndex             testIndex);
+	EIndex			TheOtherTest(   EIndex             testIndex);
 
 private:
 	Valve();
@@ -44,7 +43,7 @@ protected:
 private:
 	enum	{ CAMCOUNT  = 2, STACKLEN    = 256 };
 	unsigned int            m_resultStack[STACKLEN];
-	ETIndex	                m_pushedIndex;
+	EIndex	                m_pushedIndex;
 
 	unsigned int            m_finalResult[CAMCOUNT];
 	unsigned int            m_preResullt[CAMCOUNT];

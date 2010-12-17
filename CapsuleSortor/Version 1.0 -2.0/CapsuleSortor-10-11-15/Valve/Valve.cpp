@@ -50,7 +50,7 @@ void Valve::Enable(bool enable)
 *
 ********************************************************************************/
 
-bool Valve::Control(ETIndex testIndex,	unsigned int result)
+bool Valve::Control(EIndex testIndex,	unsigned int result)
 {
 	if(!m_enable)	return false;
 	for(int i=0; i<4; i++)
@@ -63,7 +63,7 @@ bool Valve::Control(ETIndex testIndex,	unsigned int result)
 	return true;
 }
 
-Valve::ETIndex Valve::TheOtherTest (ETIndex testIndex)
+EIndex Valve::TheOtherTest (EIndex testIndex)
 {
 	return (eFirst == testIndex) ? eSecond : eFirst;
 }
@@ -83,7 +83,7 @@ Valve::ETIndex Valve::TheOtherTest (ETIndex testIndex)
 *
 ********************************************************************************/
 
-bool Valve::PushResult(ETIndex testIndex)
+bool Valve::PushResult(EIndex testIndex)
 {
 	if (eSecond == testIndex)
 	{
@@ -115,7 +115,7 @@ bool Valve::PushResult(ETIndex testIndex)
 *
 ********************************************************************************/
 
-unsigned int  Valve::CtrlResult(ETIndex testIndex)
+unsigned int  Valve::CtrlResult(EIndex testIndex)
 {
 	unsigned int badSum	= 0;
 	unsigned int finalResult	= 0;
@@ -152,12 +152,12 @@ ValveParam Valve::GetParam	() const
 	return param;
 }
 
-void	Valve::ShortInterval(ETIndex testIndex,	  unsigned int	tempResult)
+void	Valve::ShortInterval(EIndex testIndex,	  unsigned int	tempResult)
 {
 	m_finalResult[testIndex] = (((m_preResullt[testIndex]<<1)&0xf)| (tempResult&0xf))&0xf;
 }
 
-void	Valve::LongInterval(ETIndex testIndex,	unsigned int	tempResult)
+void	Valve::LongInterval(EIndex testIndex,	unsigned int	tempResult)
 {
 	m_finalResult[testIndex]= ((m_finalResult[testIndex]|((tempResult&0xf)>>3))&0xf);
 	m_preResullt[testIndex]	= (tempResult&0xf);

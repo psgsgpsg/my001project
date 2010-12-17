@@ -484,6 +484,7 @@ bool CapsuleProc::ShrinkVertical(	IMG				image,
 *
 *
 ********************************************************************************/
+
 bool CapsuleProc::RotateIMG(	size_t	blobIndex,
 								FBLOB	profileBlob,
 								IMG		proImg,
@@ -549,6 +550,7 @@ bool CapsuleProc::RotateIMG(	size_t	blobIndex,
 *			斑点分析的方法检测是否存在斑点
 *
 ****************************************************************/
+
 bool CapsuleProc::RectangleBlob	(	IMG						image,
 									const TRect2D<long>&	roi,
 									long					wndSize,
@@ -599,6 +601,7 @@ bool CapsuleProc::RectangleBlob	(	IMG						image,
 *			斑点分析的方法检测是否存在斑点
 *
 ****************************************************************/
+
 bool CapsuleProc::RectBlackBlob(	IMG			image,
 									long		wndSize,
 									long		dynThres,
@@ -1219,7 +1222,7 @@ unsigned int CapsuleProc::TransProcess( WORKMODE mode )
 
 	if (mode == REALTIME)
 	{
-		if( Valve::eSecond == m_processIndex )
+		if( eSecond == m_processIndex )
 		{
 			CapsuleProc::AddToAllCount( counter );
 		}
