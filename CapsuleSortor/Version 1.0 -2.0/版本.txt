@@ -4,3 +4,7 @@
 2.CapsuleSortor-10-11-14-1
 修改：CapsuleProc类中增加TransBlobAnalysis函数，该函数为针对透明胶囊的斑点检测。
 
+3.CapsuleSortor-10-12-17
+1.添加达到设定数值后停车功能。
+2.完成透明胶囊在青岛的试验.
+
