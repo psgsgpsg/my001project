@@ -149,6 +149,8 @@ unsigned int __stdcall TThread::StaticThread (void* obj)
 	}
     return 0;
 }
+
+
 void TThread::Thread ()
 {
 	if(ThreadProc)
@@ -156,4 +158,3 @@ void TThread::Thread ()
 		ThreadProc(m_param);
 	}
 }
-

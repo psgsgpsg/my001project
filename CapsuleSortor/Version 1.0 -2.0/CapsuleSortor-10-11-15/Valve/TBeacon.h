@@ -13,14 +13,14 @@ class TBeacon
 public:
 	static TBeacon& TheBeacon();
 	~TBeacon();
-	bool	Trigger(Valve::ETIndex camIndex);
+	bool	Trigger(EIndex camIndex);
 	bool	Check();
 
 	bool	RedShining	()	{	return m_redShining;	}
 	bool	GreenShining()	{	return m_greenShining;	}
 	bool	YellowShining()	{	return m_yellowShining;	}
 	void	Alarm()			{	TurnRed(true);			}	
-	bool	PushResult(Valve::ETIndex camIndex, unsigned int result);
+	bool	PushResult(EIndex camIndex, unsigned int result);
 	void	ResetResult();
 
 	
@@ -49,7 +49,7 @@ private:
 	void			TurnRed			(bool ifLight);
 	void			TurnGreen		(bool ifLight);
 	void			TurnYellow		(bool ifLight);
-	bool			StaticResult	( Valve::ETIndex camIndex);
+	bool			StaticResult	( EIndex camIndex);
 
 	bool			m_greenShining;
 	bool			m_yellowShining;

@@ -99,7 +99,6 @@ BOOL CSoftWareConfig::OnInitDialog()
 	GetDlgItem(IDC_TEMP_LIST)->GetClientRect(&rect);
 	InitInterface(rect);	
 
-
 	//Init
 //	CapsuleParam param	= CapsuleProc::CapsuleInfo();
 //	SetListContent(0, param);
@@ -251,14 +250,14 @@ void CSoftWareConfig::OnNextFrame()
 	if(m_imgBuff.IsNull()) return;
 
 	CapsuleParam param;
-	Valve::ETIndex index= m_pProcessor->GetProcessIndex();
+	EIndex index= m_pProcessor->GetProcessIndex();
 
 	switch(index)
 	{
-	case Valve::eFirst:
+	case eFirst:
 		param = GetListContent(0);
 		break;
-	case Valve::eSecond:
+	case eSecond:
 		param = GetListContent(2);
 		break;
 	}
@@ -281,10 +280,10 @@ void CSoftWareConfig::OnNextFrame()
 	
 	switch(index)
 	{
-	case Valve::eFirst:
+	case eFirst:
 		SetListContent(0, param);
 		break;
-	case Valve::eSecond:
+	case eSecond:
 		SetListContent(2, param);
 		break;
 	}
@@ -357,16 +356,16 @@ bool CSoftWareConfig::Process(const TImgBuffer &imgBuff)
 		}
 		else
 		{
-			Valve::ETIndex index = m_pProcessor->GetProcessIndex();
+			EIndex index = m_pProcessor->GetProcessIndex();
 			m_dimVectPerFrame.clear();
 			m_dimVectPerFrame.push_back(proData.GetParam());		
 			m_curParam = GetStdDim(m_dimVectPerFrame);
 			switch(index)
 			{
-			case Valve::eFirst:
+			case eFirst:
 				SetListContent(1, proData.GetParam());
 				break;
-			case Valve::eSecond:
+			case eSecond:
 				SetListContent(3, proData.GetParam());
 				break;
 			}				

@@ -152,7 +152,7 @@ public:
 								long	wndSize,
 								long	dynThres,
 								long	blobSize);
-	const	Valve::ETIndex	GetProcessIndex()	{	return m_processIndex;	};
+	const	EIndex	GetProcessIndex()	{	return m_processIndex;	};
 
 	
 public:
@@ -168,7 +168,7 @@ public:
 	static ESaveState	GetSaveState	( );
 	static ESaveState	SetSaveState	(	ESaveState NextState);
 
-	void			SetProcessIndex	(	Valve::ETIndex index){	m_processIndex = index;};
+	void			SetProcessIndex	(	EIndex index){	m_processIndex = index;};
 
 	TImgBuffer		GetRecordedImage( );
 	void			ClearRecordedImage();
@@ -204,7 +204,7 @@ protected:
 private:
 	TImgBuffer		m_imgBuffer;
 	TImgDim			m_dim;
-	Valve::ETIndex	    m_processIndex;
+	EIndex	    m_processIndex;
 	static size_t		m_allCount;							//全部胶囊数量
 	static size_t		m_badCount;							//次品胶囊数量
 	//int				m_badArray[CAPSULENUM][BAD_ARRAY_LEN];

@@ -37,7 +37,11 @@ struct CapsuleDim
 	size_t		width;				//胶囊的宽度
 	size_t		height;				//胶囊的长度
 };
-
+typedef enum 
+{ 
+	eFirst = 0,
+	eSecond = 1  
+} EIndex;
 struct CapsuleParam 
 {
 	CapsuleDim	capsuleDim;
@@ -50,7 +54,7 @@ struct CapsuleParam
 
 struct ValveParam
 {
-	int		IOBoard;
+	int		IOBoard;			//用于选择控制板的方式，现已废弃
 	int		ResultInterval;		//两个相机的视场间隔
 };
 
@@ -94,8 +98,8 @@ struct CameraParam
 	size_t			balanceBlue;
 	std::string		camTag;					//相机标识
 
-	CameraParam() :
-        balanceRed(100), 
+	CameraParam() 
+	:balanceRed(100), 
 	balanceGreen(100),
 	balanceBlue(100)
 	{ }
@@ -105,7 +109,7 @@ struct ComCtrlParam
 {
 	size_t	portIndex;
 	size_t	baudRate;
-ComCtrlParam():
+	ComCtrlParam():
 	portIndex(1),
 	baudRate(57600)
 	{}
@@ -115,8 +119,9 @@ struct RadiumRange
 {
 	int		minRadium;
 	int		maxRadium;
-	RadiumRange():
-	minRadium(40),
+
+	RadiumRange()
+	:minRadium(40),
 	maxRadium(70)
 	{}
 };
@@ -125,8 +130,9 @@ struct MinboxWidthRange
 {
 	int		minWidth;
 	int		maxWidth;
-	MinboxWidthRange():
-	minWidth(0),
+
+	MinboxWidthRange()
+	:minWidth(0),
 	maxWidth(20)
 	{}
 };
@@ -147,8 +153,7 @@ struct RemainParam
 };
 
 class TCapsuleParam
-{
-	
+{	
 private:
 	CapsuleParam		m_info;
 public:
@@ -162,6 +167,4 @@ public:
 	CapsuleParam&		GetParam()										{	return m_info;									};
 
 };
-
-
 #endif //TYPEDEFINE_H

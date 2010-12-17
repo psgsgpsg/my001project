@@ -186,7 +186,7 @@ unsigned int MonoProcess::ComProcess( WORKMODE mode)
 	m_sortObserver.ObserverParam(SortObserver::MResult, badResult & 0x0F);
 	m_sortObserver.ObserverParam(SortObserver::MTime,	td.msec()		);
 
-	if (Valve::eFirst == GetProcessIndex())
+	if (eFirst == GetProcessIndex())
 	{
 		CapsuleProc::AddToAllCount(counter);
 	}

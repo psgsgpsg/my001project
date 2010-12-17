@@ -69,7 +69,7 @@ void	TBeacon::TurnYellow		(bool shining)
 	}
 }
 
-bool	TBeacon::Trigger( Valve::ETIndex camIndex)
+bool	TBeacon::Trigger( EIndex camIndex)
 {
 	TLocker lock(m_critSect);
 	
@@ -97,7 +97,7 @@ bool	TBeacon::Check()
 	return true;
 }
 
-bool	TBeacon::PushResult(Valve::ETIndex camIndex, unsigned int result)
+bool	TBeacon::PushResult(EIndex camIndex, unsigned int result)
 {
 	for (int index = 0; index < CapsuleProc::BAD_ARRAY_LEN - 1; index++)
 	{
@@ -108,7 +108,7 @@ bool	TBeacon::PushResult(Valve::ETIndex camIndex, unsigned int result)
 	return true;
 }
 
-bool	TBeacon::StaticResult(Valve::ETIndex camIndex)
+bool	TBeacon::StaticResult(EIndex camIndex)
 {
 	unsigned int badCount[CapsuleProc::CAPSULENUM];
 	memset(badCount, 0, sizeof(badCount));
@@ -135,8 +135,8 @@ bool	TBeacon::StaticResult(Valve::ETIndex camIndex)
 
 void	TBeacon::ResetResult()
 {
-	memset(m_badArray[Valve::eFirst], 0, CapsuleProc::BAD_ARRAY_LEN * sizeof(unsigned int));
-	memset(m_badArray[Valve::eSecond], 0, CapsuleProc::BAD_ARRAY_LEN * sizeof(unsigned int));
+	memset(m_badArray[eFirst], 0, CapsuleProc::BAD_ARRAY_LEN * sizeof(unsigned int));
+	memset(m_badArray[eSecond], 0, CapsuleProc::BAD_ARRAY_LEN * sizeof(unsigned int));
 	TurnGreen(true);
 }
 

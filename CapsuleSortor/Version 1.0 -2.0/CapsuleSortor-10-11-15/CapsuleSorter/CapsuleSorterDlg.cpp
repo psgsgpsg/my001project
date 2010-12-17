@@ -1263,7 +1263,7 @@ void	CapsuleSorterDlg::FirstCamFunc	(void *param)
 			size_t badCount = 0;
 			if (Valve::eShortInterval == interType)
 			{
-				badCount	= Valve::TheValve().CtrlResult(	Valve::eFirst);
+				badCount	= Valve::TheValve().CtrlResult(	eFirst);
 			}	
 			CapsuleProc::AddToBadCount(badCount);
 		}
@@ -1299,14 +1299,14 @@ void	CapsuleSorterDlg::FirstCamFunc	(void *param)
 				size_t		ctlResult	= result &0x0f;		
 				if (Valve::eShortInterval == interType)
 				{
-					Valve::TheValve().ShortInterval(Valve::eFirst, ctlResult);
+					Valve::TheValve().ShortInterval(eFirst, ctlResult);
 				}
 				else
 				{
-					Valve::TheValve().LongInterval(Valve::eFirst, ctlResult);
+					Valve::TheValve().LongInterval(eFirst, ctlResult);
 				}
-				TBeacon::TheBeacon().PushResult(Valve::eFirst, ctlResult);
-				TBeacon::TheBeacon().Trigger(Valve::eFirst);
+				TBeacon::TheBeacon().PushResult(eFirst, ctlResult);
+				TBeacon::TheBeacon().Trigger(eFirst);
 			}
 			catch(...)
 			{
@@ -1371,7 +1371,7 @@ void	CapsuleSorterDlg::SecondCamFunc	(void *param)
 			lastPeriod = period;
 			if (Valve::eShortInterval == interType)
 			{
-				badCount	= Valve::TheValve().PushResult(Valve::eSecond);
+				badCount	= Valve::TheValve().PushResult(eSecond);
 			}
 		}
 		catch(...)
@@ -1405,15 +1405,15 @@ void	CapsuleSorterDlg::SecondCamFunc	(void *param)
 				size_t		ctlResult	= result &0x0f;
 				if (Valve::eShortInterval == interType)
 				{
-					Valve::TheValve().ShortInterval(Valve::eSecond, ctlResult);
+					Valve::TheValve().ShortInterval(eSecond, ctlResult);
 				}
 				else
 				{
-					Valve::TheValve().LongInterval(Valve::eSecond, ctlResult);
+					Valve::TheValve().LongInterval(eSecond, ctlResult);
 				}	
 
-				TBeacon::TheBeacon().PushResult(Valve::eSecond, ctlResult);
-				TBeacon::TheBeacon().Trigger(Valve::eSecond);
+				TBeacon::TheBeacon().PushResult(eSecond, ctlResult);
+				TBeacon::TheBeacon().Trigger(eSecond);
 			}
 			catch(...)
 			{
@@ -1491,7 +1491,7 @@ void	CapsuleSorterDlg::InitImageCard	()
 		m_firstCam.SetExpTime(	camParam.expTime);		
 	}
 	
-	m_simCam.RegisterProcFunc	(	CapsuleSorterDlg::FirstCamFunc,		this);
+	m_simCam.RegisterProcFunc		(	CapsuleSorterDlg::FirstCamFunc,		this);
 	m_secondSimCam.RegisterProcFunc	(	CapsuleSorterDlg::SecondCamFunc,	this);
 
 //	m_firstManager.SetThreadFunc(CapsuleSorterDlg::FirstManagerFunc, this);
@@ -1531,8 +1531,8 @@ void	CapsuleSorterDlg::InitImageCard	()
 		m_firstProcess.ReInit(dim);
 	}
 
-	m_firstProcess.SetProcessIndex(Valve::eFirst);
-	m_secondProcess.SetProcessIndex(Valve::eSecond);
+	m_firstProcess.SetProcessIndex(eFirst);
+	m_secondProcess.SetProcessIndex(eSecond);
 }
 
 /*******************************************************************************
